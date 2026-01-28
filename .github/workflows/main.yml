@@ -1,1 +1,25 @@
+name: Release
 
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version Number"
+        required: true
+        default: "v0.0.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: zip -r release.zip pack.mcmeta assets
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create ${{ inputs.version }} release.zip
