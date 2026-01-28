@@ -30,9 +30,9 @@ float LinearizeDepth(float depth)
 
 
 void main(){ 
-    float FogStartDepth = float(256 * texture(EntityOutlineSampler, vec2(0.6,0.5)).r);
-    float FogEndDepth = float(256 * texture(EntityOutlineSampler, vec2(0.6,0.5)).g);
-    vec4 FogColour = texture(EntityOutlineSampler, vec2(0.4,0.5));
+    float FogStartDepth = float(256 * texture(EntityOutlineSampler, vec2(1.0,0.0)).r);
+    float FogEndDepth = float(256 * texture(EntityOutlineSampler, vec2(1.0,0.0)).g);
+    vec4 FogColour = texture(EntityOutlineSampler, vec2(0.0,0.0));
     float BlockDepth = LinearizeDepth(texture(MainDepthSampler, texCoord).r);
     float BlockDistance = length(vec3(1., (2.*texCoord - 1.) * vec2(ScreenSize.x/ScreenSize.y,1.) * tan(radians(FOV / 2.))) * BlockDepth);
     if(BlockDistance > FogStartDepth && BlockDistance <FogEndDepth) {
@@ -46,5 +46,6 @@ void main(){
         fragColor = texture(InSampler, texCoord);
     }
 }
+
 
 
