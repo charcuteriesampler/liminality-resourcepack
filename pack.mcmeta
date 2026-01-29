@@ -1,6 +1,12 @@
 {
     "pack": {
         "description": "Liminality",
-        "pack_format": 75
+        "pack_format": 94.1,
+        "min_format": 64,
+        "max_format": 94.1,
+        "supported_formats": {
+            "min_inclusive": 64,
+            "max_inclusive": 94.1
+        }
     }
 }
