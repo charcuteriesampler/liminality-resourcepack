@@ -32,17 +32,15 @@ float LinearizeDepth(float depth)
 void main(){ 
     float AmbientBrightness = float(texture(EntityOutlineSampler, vec2(0.0,1.0)).r);
     float FlashlightPower = float(256 * texture(EntityOutlineSampler, vec2(0.0,1.0)).g);
-    
     float BlockDepth = LinearizeDepth(texture(MainDepthSampler, texCoord).r);
-    float BlockDistance = length(vec3(1., (2.*texCoord - 1.) * vec2(ScreenSize.x/ScreenSize.y,1.) * tan(radians(FOV / 2.))) * BlockDepth);
+    float BlockDistance = length(vec3(1., (2.*texCoord - 1.) * vec2(ScreenSize.x/ScreenSize.y,1.) * tan(radians(FOV / 2.))) * BlockDepth) + 1;
     
     float DistanceFromScreenCenter = distance(vec2(texCoord*vec2(ScreenSize.x/ScreenSize.y,1.)), vec2(vec2(ScreenSize.x/ScreenSize.y,1.) * 0.5));
-    float FlashlightRaduis = (0.9 / BlockDistance) + 0.1;
+
+    float FlashlightRaduis = (2 * atan(2 / (sqrt(BlockDistance) * 2)));
     float Brightness = max((FlashlightPower / BlockDistance) * ((FlashlightRaduis - DistanceFromScreenCenter)/0.2) , AmbientBrightness);
     
     fragColor = (texture(InSampler, texCoord)* Brightness);
 
 
 }
-
-
