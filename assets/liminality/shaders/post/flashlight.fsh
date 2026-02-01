@@ -1,5 +1,6 @@
 #version 330
 
+#moj_import <liminality:util.glsl>
 
 uniform sampler2D InSampler;
 uniform sampler2D EntityOutlineSampler;
@@ -14,24 +15,17 @@ layout(std140) uniform SamplerInfo {
 };
 
 layout(std140) uniform FogConfig {
-    
     float FOV;
 };
 
 out vec4 fragColor;
 
-float near = 0.1; 
-float far  = 1000.0;
-float LinearizeDepth(float depth) 
-{
-    float z = depth * 2.0 - 1.0;
-    return (near * far) / (far + near - z * (far - near));    
-}
+void main(){
+    vec4 InputData = texture(EntityOutlineSampler, GFX_INPUT_3);
 
+    float AmbientBrightness = float(InputData.r);
+    float FlashlightPower = InputData.g * 256;
 
-void main(){ 
-    float AmbientBrightness = float(texture(EntityOutlineSampler, vec2(0.0,1.0)).r);
-    float FlashlightPower = float(256 * texture(EntityOutlineSampler, vec2(0.0,1.0)).g);
     float BlockDepth = LinearizeDepth(texture(MainDepthSampler, texCoord).r);
     float BlockDistance = length(vec3(1., (2.*texCoord - 1.) * vec2(ScreenSize.x/ScreenSize.y,1.) * tan(radians(FOV / 2.))) * BlockDepth) + 1;
     
@@ -46,6 +40,4 @@ void main(){
     }
     
     fragColor = (texture(InSampler, texCoord)* Brightness);
-
-
 }
