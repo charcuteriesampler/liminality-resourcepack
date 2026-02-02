@@ -13,7 +13,7 @@ layout(std140) uniform SamplerInfo {
     vec2 ScreenSize;
 };
 
-layout(std140) uniform FogConfig {
+layout(std140) uniform FlashlightConfig {
     
     float FOV;
 };

@@ -53,7 +53,7 @@
             ],
             "output": "main",
             "uniforms": {
-                "FogConfig": [
+                "FlashlightConfig": [
                     {
                         "name": "FOV",
                         "type": "float",
@@ -64,11 +64,41 @@
         },
         {
             "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "liminality:post/chromatic_aberration",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "minecraft:main"
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "ChromaticAberrationConfig": [
+                    {
+                        "name": "RShift",
+                        "type": "vec2",
+                        "value": [0.2, 0]
+                    },
+                    {
+                        "name": "GShift",
+                        "type": "vec2",
+                        "value": [-0.2, 0]
+                    },
+                    {
+                        "name": "BShift",
+                        "type": "vec2",
+                        "value": [0, 0.2]
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/blit",
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "final"
+                    "target": "swap"
                 }
             ],
             "uniforms": {
