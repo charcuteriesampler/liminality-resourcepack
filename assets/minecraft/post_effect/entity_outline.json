@@ -53,7 +53,7 @@
                     "use_depth_buffer": true
                 }
             ],
-            "output": "main",
+            "output": "minecraft:entity_outline",
             "uniforms": {
                 "FlashlightConfig": [
                     {
@@ -72,10 +72,10 @@
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "minecraft:main"
+                    "target": "minecraft:entity_outline"
                 }
             ],
-            "output": "final",
+            "output": "swap",
             "uniforms": {
                 "ChromaticAberrationConfig": [
                     {
@@ -104,7 +104,7 @@
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "final"
+                    "target": "swap"
                 }
             ],
             "uniforms": {
