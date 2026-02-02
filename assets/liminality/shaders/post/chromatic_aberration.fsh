@@ -31,7 +31,7 @@ void main(){
     float Green = texture(InSampler, OffsetPosition(texCoord, GShift)).g;
     float Blue = texture(InSampler, OffsetPosition(texCoord, BShift)).b;
     
-    fragColor = vec4(Red, Green, Blue, 1);
-
+    //fragColor = vec4(Red, Green, Blue, 1);
+    fragColor = vec4(1, 1, 1, 1);
 
 }
