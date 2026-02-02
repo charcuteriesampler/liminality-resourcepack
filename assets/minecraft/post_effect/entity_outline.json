@@ -75,7 +75,7 @@
                     "target": "minecraft:main"
                 }
             ],
-            "output": "final",
+            "output": "swap",
             "uniforms": {
                 "ChromaticAberrationConfig": [
                     {
@@ -104,7 +104,7 @@
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "final"
+                    "target": "swap"
                 }
             ],
             "uniforms": {
